@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import express, {Request, Response, NextFunction, response} from 'express'
+import express, {Request, Response, NextFunction} from 'express'
 import 'express-async-errors'
 
 import { router } from './routes'
@@ -12,9 +12,9 @@ app.use(express.json())
 
 app.use(router)
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, response: Response, next: NextFunction) => {
   if(err instanceof Error) {
-    return res.status(400).json({
+    return response.status(400).json({
       error: err.message
     })
   }
@@ -25,4 +25,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   })
 })
 
-app.listen(3000, () => console.log("Server is running"))
+app.listen(3003, () => console.log("Server is running"))
